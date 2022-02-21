@@ -3,7 +3,8 @@
 
 import pandas as pd
 import streamlit as st
-from estados_municipios import retornaEstado, retornaMunicipios
+from opcao_grafico import visualiza_grafico
+from opcao_tabela import visualizar_tabela
 
 # Configurações do streamlit para a pagina web
 st.set_page_config(
@@ -33,28 +34,7 @@ st.sidebar.title("Selecionar as opções:")
 
 tipo_visualização = st.sidebar.selectbox("Selecione o tipo de visualização", ["Gráfico", "Tabela"])
 
-nivel = st.sidebar.selectbox("Nível de acesso", ["Nacional", "Estadual", "Municipal"])
-
-if nivel == "Estadual":
-    estado = st.sidebar.selectbox("Selecione o estado", retornaEstado())
-    cargo_politico = st.sidebar.selectbox("Selecione o cargo", ["Deputado Federal", "Deputado Estadual", "Governador", "Senador"])
-    
-elif nivel == "Municipal":
-    estado = st.sidebar.selectbox("Selecione o estado", retornaEstado())
-    municipio = st.sidebar.selectbox("Selecione o município", retornaMunicipios(estado))
-
-anos_federal_estadual = (1998, 2002, 2006, 2010, 2014, 2018)
-anos_municipais = (2000, 2004, 2008, 2012, 2016)
-
-if nivel in ("Estadual", "Nacional"):
-    ano = st.sidebar.slider("Selecione o ano", 1998, 2018, step=4)
+if tipo_visualização == "Gráfico":
+    visualiza_grafico()
 else:
-    ano = st.sidebar.slider("Selecione o ano", 2000, 2016, step=4)
-
-
-consultar = st.sidebar.selectbox("Consultar", ["Resultado Eleitoral", "Caracteristicas dos Candidatos"])
-
-if consultar == "Resultado Eleitoral":
-    st.sidebar.markdown("""Resultado Eleitoral, é o resultado dos candidatos eleitos e não eleitos e o total de votos.""")
-else:
-    st.sidebar.markdown("""Informações sobre idade, raça e escolaridade dos candidatos por estado""")
+    visualizar_tabela()
