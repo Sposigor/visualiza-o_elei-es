@@ -7,7 +7,7 @@ authors = ["Igor Esposito <sposigor@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 pandas = "^1.4.1"
-streamlit = "^1.5.1"
+streamlit = "^1.11.1"
 pyUFbr = "^0.1.0"
 plotly = "^5.6.0"
 
